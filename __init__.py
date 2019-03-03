@@ -10,6 +10,10 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+    return app
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -32,4 +36,3 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
-    return app
